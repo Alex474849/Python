@@ -1,1 +1,1 @@
-# Python
+# I learning python, and i think it is wonderful
