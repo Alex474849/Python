@@ -1,3 +1,4 @@
+
 import sys                      # Модуль sys  будет завершать по команде игру
 import pygame                   # Модуль pygame содержит всю функциаеалность для создания игры
 from settings import Settings   # иморптруем settings

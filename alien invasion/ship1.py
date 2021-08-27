@@ -9,10 +9,12 @@ class Ship():
         self.rect.centerx = self.screen_rect.centerx    
         self.rect.bottom = self.screen_rect.bottom      # центрируем изоюражение
         self.moving_right = False
+        self.moving_left = False
     def update(self):                                   # Этот метод перемешает корабль, есди флаг self.moving_right = True
-        if self.moving_right:
-            self.rect.centerx += 1
-    
+       if self.moving_right == True:
+          self.rect.centerx += 1
+       if self.moving_left == True:
+          self.rect.centerx -= 1
     def blitme(self):
             self.screen.blit(self.image, self.rect)   
 
