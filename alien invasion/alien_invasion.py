@@ -1,9 +1,11 @@
 
 import sys                      # Модуль sys  будет завершать по команде игру
-import pygame                   # Модуль pygame содержит всю функциаеалность для создания игры
+import pygame
+from pygame.sprite import Group                   # Модуль pygame содержит всю функциаеалность для создания игры
 from settings import Settings   # иморптруем settings
 from ship1 import Ship          # импортируем ship
 import game_functions as gf
+
 def run_game():                 #   Определяем функцию
     pygame.init()               #   Инициализруем настроки pygame
     ai_settings = Settings()      # Ипортируем класс settigs и вставляем ai_settings
@@ -12,12 +14,14 @@ def run_game():                 #   Определяем функцию
     screen = pygame.display.set_mode((1700, 1000))    #    Создаем отображаемую область, аргуметы означают размеры игрового окна
     pygame.display.set_caption("Alien Invasion")       #    Отображение названия игры     
     bg_color = (230, 230, 230)                          # выбрали цвет экрана
-    ship = Ship(screen)                             # Создаем корабль до начала цикла while
+    ship = Ship(ai_settings, screen)
+    bullets = Group()                            # Создаем корабль до начала цикла while
 
     while True:                                     # Запускаем цикл
-        gf.check_events(ship)
+        gf.check_events(ship, ai_settings, screen, bullets)
         ship.update()
-        gf.update_screen(ai_settings, screen, ship)                                     
+        bullets.update()
+        gf.update_screen(ai_settings, screen, ship, bullets)                                     
         for event in pygame.event.get():            # Чтобы наша прогрмма реагировала на акие либо действия напишем цикл for. Используем метод pygame.event.get():, чтобы получать доступ к событиям
             if event.type == pygame.QUIT:           # Пишем if для обнаружение и обработки конкретных действий
                 sys.exit()                          # Например мы закрываем программа, он обнаруживает  pygame.QUIT: и вызывает sys.exit() который завершает игру
