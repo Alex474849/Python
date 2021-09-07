@@ -18,7 +18,7 @@ def run_game():                 #   Определяем функцию
     bullets = Group()                            # Создаем корабль до начала цикла while
 
     while True:                                     # Запускаем цикл
-        gf.check_events(ship, ai_settings, screen, bullets)
+        gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         bullets.update()
         gf.update_screen(ai_settings, screen, ship, bullets)                                     

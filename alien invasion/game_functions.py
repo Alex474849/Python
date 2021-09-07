@@ -18,7 +18,7 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
     
 
-def check_events(ship, ai_settings, screen, bullets):
+def check_events(ai_settings, screen, ship, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()

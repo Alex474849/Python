@@ -12,6 +12,10 @@ class Ship():
         self.center = float(self.rect.centerx)
         self.moving_right = False
         self.moving_left = False
+        self.bullet_width = ai_settings.bullet_width = 3 
+        self.bullet_height = ai_settings.bullet_height = 15
+        self.bullet_color = ai_settings.bullet_color = 10, 30, 100 
+        self.bullet_speed_factor = ai_settings.bullet_speed_factor = 1 
     def update(self):                                   # Этот метод перемешает корабль, есди флаг self.moving_right = True
        if self.moving_right and self.rect.right < self.screen_rect.right:
           self.center += self.ai_settings.ship_speed_factor
