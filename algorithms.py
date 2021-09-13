@@ -135,15 +135,16 @@ print(merge([7,5,2,3,9,8]))
 
 # Быстрая сортировка
 
-
+"""
 def quick_sort(s):
     if len(s)<= 1:
         return s
-    elem = s[0]
-    left = list(filter(lambda x: x<elem, s))
-    center = [i for i in s if i== elem ]
-    right = list(filter(lambda x: x>elem, s)) 
+    elem = s[0]                                     # Выбираем опорный элемент
+    left = list(filter(lambda x: x<elem, s))        # В левой части выбираем из списка числа меньше опорного 
+    center = [i for i in s if i== elem ]            # Элементы равные опорному
+    right = list(filter(lambda x: x>elem, s))       # справ жлементы которые больше опорного
 
-    return quick_sort(left) + center + quick_sort(right)  
+    return quick_sort(left) + center + quick_sort(right)  #     Справа и слева они не отсортированы поэутому передаем им функцию quick sort, она рекусивна поэтому действия будут повотряться вновь пока не будет длстигнут базовый случай
 
 print(quick_sort([7,6,10,5,9,8,3,4]))
+"""
