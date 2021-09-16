@@ -148,3 +148,97 @@ def quick_sort(s):
 
 print(quick_sort([7,6,10,5,9,8,3,4]))
 """
+
+# Поиск в ширину с помошью графов
+
+"""
+N, M = map(int, input().split())            # Вводим кол-во вершин и ребер  
+graph = {i:set() for i in range(N)}         # Будем хранить в  виде словаря с множествами
+for i in range(M):
+
+    v1, v2 = map(int, input().split())      # Считываем ребро
+    graph[v1].add(v2)                       # Добавляем смежность 2-ух вершин
+    graph[v2].add(v1)
+
+from collections import deque              
+distance = [None] * N                       # Расстояние, по дефолту неизвестно
+start_vertex = 0                            # Начинаем с вершины 0
+distance[start_vertex] = 0                  # Расстояние до верщины 0 равно 0
+queue = deque([start_vertex])               # Создаем очередь
+
+while queue:                                # Цмкл выполняется пока очередь не пуста 
+    cur_v = queue.popleft()                  # Достаем первый элемент
+    for neigh_v in  graph[cur_v]:            # Про ходим всех ео соседей
+        if distance[neigh_v] is None:        # если сосед не посещен
+            distance[neigh_v] = distance[cur_v] + 1     # Считаем расстояние 
+            queue.append(neigh_v)                   # Добавляем в очередь
+print(distance)     
+"""
+
+
+# Алкогритм Дейкстры
+"""
+import math
+
+
+def arg_min(T, S):
+    amin = -1
+    m = math.inf  # максимальное значение
+    for i, t in enumerate(T):
+        if t < m and i not in S:
+            m = t
+            amin = i
+
+    return amin
+
+
+D = ((0, 3, 1, 3, math.inf, math.inf),
+     (3, 0, 4, math.inf, math.inf, math.inf),
+     (1, 4, 0, math.inf, 7, 5),
+     (3, math.inf, math.inf, 0, math.inf, 2),
+     (math.inf, math.inf, 7, math.inf, 0, 4),
+     (math.inf, math.inf, 5, 2, 4, 0))
+
+N = len(D)  # число вершин в графе
+T = [math.inf]*N   # последняя строка таблицы
+
+v = 0       # стартовая вершина (нумерация с нуля)
+S = {v}     # просмотренные вершины
+T[v] = 0    # нулевой вес для стартовой вершины
+M = [0]*N   # оптимальные связи между вершинами
+
+while v != -1:          # цикл, пока не просмотрим все вершины
+    for j, dw in enumerate(D[v]):   # перебираем все связанные вершины с вершиной v
+        if j not in S:           # если вершина еще не просмотрена
+            w = T[v] + dw
+            if w < T[j]:
+                T[j] = w
+                M[j] = v        # связываем вершину j с вершиной v
+
+    v = arg_min(T, S)            # выбираем следующий узел с наименьшим весом
+    if v >= 0:                    # выбрана очередная вершина
+        S.add(v)                 # добавляем новую вершину в рассмотрение
+
+#print(T, M, sep="\n")
+
+# формирование оптимального маршрута:
+start = 0
+end = 4
+P = [end]
+while end != start:
+    end = M[P[-1]]
+    P.append(end)
+
+print(P)
+"""
+
+# Представляем число в любой системе исчислений
+
+base = 3
+
+x = int(input("Enter the number:"))
+
+while x>0:
+    digit = str(x % base) 
+    print(digit, end='')
+    x //= base
