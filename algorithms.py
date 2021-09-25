@@ -233,7 +233,7 @@ print(P)
 """
 
 # Представляем число в любой системе исчислений
-
+"""
 base = 3
 
 x = int(input("Enter the number:"))
@@ -242,3 +242,4 @@ while x>0:
     digit = str(x % base) 
     print(digit, end='')
     x //= base
+"""
