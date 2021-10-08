@@ -1,29 +1,18 @@
-from aiogram import Bot, types
-from aiogram.dispatcher import Dispatcher
-from aiogram.utils import executor
+# обычный эхо-бот
 
-from config_my_first_bot import TOKEN
+from telebot import *
+from config_my_first_bot import TOKEN 
+        """ Импортируем все библиотеки , в том числе токен"""
 
+bot = telebot.TeleBot(TOKEN)
 
+@bot.message_handler(commands=['start'])            # С этой функции приветствуем  пользователя
+def start_message(message):
+    bot.send_message(message.chat.id, "Привет, Даня. Я буду повторять все то что ты напишешь в этот чат!!")
 
-bot = Bot(token=TOKEN)
-
-dp = Dispatcher(bot)
-
-@dp.message_handler(commands=['start'])
-async def process_start_command(message: types.Message):
-    await message.reply("Привет!\nНапиши мне что-нибудь!")
-
-@dp.message_handler(commands=['help'])
-async def process_help_command(message: types.Message):
-    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
+@bot.message_handler(content_types = ['text'])      # С помощьб этой функции просто повторяем, то что напечатает юзер
+def repeat_message(message):
+    bot.send_message(message.chat.id, message.text) 
 
 
-@dp.message_handler()
-async def echo_message(msg: types.Message):
-    await bot.send_message(msg.from_user.id, msg.text)
-
-
-if __name__ == '__main__':
-    executor.start_polling(dp)
-
+bot.infinity_polling()
