@@ -1,3 +1,27 @@
+# Линейный поиск
+
+from abc import ABC
+
+
+def array_search(A:list, N:int , x:int):
+    """ Осуществялем поиск х в массиве А 
+        от 0 до N- 1 индекса вклбчительно.
+        Возвращает индекс элемента x в массиве А 
+        Или -1, если такого нет
+    """
+    pass
+def test1():
+    A1 = [1,2,3,4,5]
+    m = array_search(A1, 4, 9)
+    if m == -1:
+        print("ok")
+    else:
+        print("no ok") 
+
+test1()
+
+
+
 # Сортировка
 
 
@@ -243,5 +267,6 @@ while x>0:
     print(digit, end='')
     x //= base
 """
+
 
 
